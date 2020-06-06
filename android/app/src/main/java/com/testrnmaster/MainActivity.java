@@ -19,13 +19,22 @@ package com.testrnmaster;
 //}
 import androidx.annotation.Nullable;
 
-import com.reactnativenavigation.NavigationActivity;
+import com.reactnativenavigation.NavigationApplication;
+import com.reactnativenavigation.react.NavigationReactNativeHost;
+import com.reactnativenavigation.react.ReactGateway;
 
-public class MainActivity extends NavigationActivity {
 
+//import com.reactnativenavigation.NavigationActivity;
+
+public class MainApplication extends NavigationApplication {
   @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+  protected ReactGateway createReactGateway() {
+    ReactNativeHost host = new NavigationReactNativeHost(this, isDebug(), createAdditionalReactPackages()) {
+      @Override
+      protected String getJSMainModuleName() {
+        return "index";
+      }
+    };
+    return new ReactGateway(this, isDebug(), host);
   }
-
 }
